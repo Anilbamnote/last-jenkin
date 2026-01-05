@@ -9,7 +9,7 @@ pipeline {
         stage('build-stage') {
             steps {
                
-                echo "build-sucess" 
+                sh '''/opt/maven/bin/mvn claen package'''
             }
         }
         stage('test-stage') {
