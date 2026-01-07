@@ -15,10 +15,13 @@ pipeline {
         stage('test-stage') {
             steps {
                
-             sh '''/opt/maven/bin/mvn clean verify sonar:sonar \\
-  -Dsonar.projectKey=new-studentapp \\
-  -Dsonar.host.url=http://13.58.131.235:9000 \\
-  -Dsonar.login=cb3a8ed37f0d155447ddaec6db9516b9b05ea07f'''
+               withSonarQubeEnv(installationName: 'sonar',credentialsId: 'sonar-cred') {
+              sh '''/opt/maven/bin/mvn clean verify sonar:sonar'''
+}
+//              sh '''/opt/maven/bin/mvn clean verify sonar:sonar \\
+//   -Dsonar.projectKey=new-studentapp \\
+//   -Dsonar.host.url=http://13.58.131.235:9000 \\
+//   -Dsonar.login=cb3a8ed37f0d155447ddaec6db9516b9b05ea07f'''
             }
         }
         stage('Deploy') {
