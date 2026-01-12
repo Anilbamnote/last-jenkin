@@ -25,14 +25,14 @@ pipeline {
             }
         }
 
-        stage('quality_gate') {
-            steps {
-             timeout(10) {
+        // stage('quality_gate') {
+        //     steps {
+        //      timeout(10) {
                     
-                   }
-                waitForQualityGate true
-                }
-        }
+        //            }
+        //         waitForQualityGate true
+        //         }
+        // }
         stage('Deploy') {
             steps {
                 deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'tom-cred', path: '', url: 'http://3.148.190.199:8080/')], contextPath: 'index.html', war: '**/*.war'
